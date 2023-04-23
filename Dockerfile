@@ -6,11 +6,11 @@ COPY package.json ./
 COPY pnpm-lock.yaml ./
 RUN corepack enable --install-directory=/usr/bin \
     && corepack prepare --activate pnpm@latest
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --no-frozen-lockfile
 COPY . .
 RUN pnpm run build
 RUN rm -rf node_modules
-RUN pnpm install --frozen-lockfile --prod
+RUN pnpm install --no-frozen-lockfile --prod
 
 # runtime image
 FROM node:18-alpine
